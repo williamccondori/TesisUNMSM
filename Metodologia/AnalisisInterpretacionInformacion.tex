@@ -1,0 +1,39 @@
+\section{Análisis e interpretación de la información}
+\label{sec:AnalisisInterpretacionInformacion}
+
+Una vez finalizada la fase de recolección de datos, se dio inicio al análisis e interpretación de la información. Se utilizaron todos los documentos bibliográficos disponibles para respaldar el marco teórico de la investigación. En relación a los datos recopilados para los experimentos, se siguió un proceso metodológico que abarcó las siguientes etapas:
+
+\begin{enumerate}
+    \item Preprocesamiento.
+    \item Entrenamiento, validación y pruebas.
+    \item Posprocesamiento.
+    \item Evaluación de resultados.
+\end{enumerate}
+
+\subsection{Preprocesamiento}
+
+En esta etapa, se normalizó la información recolectada de diversas fuentes, tanto para datos vectoriales como para datos raster. En el caso de los datos vectoriales, se implementó un proceso de rasterización para crear máscaras a partir de la información de los glaciares delimitados, manteniendo la clasificación entre glaciar limpio y glaciar cubierto. Previo a esto, se estandarizó el sistema de coordenadas empleado, de manera que todos los productos cartográficos se ajustaran a \textit{EPSG:32717 - WGS 84 / UTM zone 17S}, con el objetivo de prevenir problemas asociados a un manejo incorrecto.
+
+Posteriormente, se efectuó la estandarización de la resolución espacial de todas las imágenes multiespectrales y los productos derivados de los modelos digitales de elevación. Por último, se procedió a la selección de canales de entrada para el modelo de segmentación semántica, que incluían las bandas espectrales de las imágenes Sentinel-2, los productos derivados de los modelos digitales de elevación e índices espectrales como NDSI, NDWI y NDVI.
+
+\subsection{Entrenamiento y validación}
+
+La etapa de entrenamiento y validación inició con la creación de mosaicos de 256x256 derivados de las imágenes multibanda y sus máscaras asociadas correspondientes a la Cordillera Blanca. Dada la limitada cantidad de mosaicos disponibles, se decidió implementar un proceso de aumento de datos para incrementar la cantidad de mosaicos empleados en la fase de entrenamiento y validación. Posteriormente, se procedió a configurar los hiperparámetros de los distintos modelos a utilizar, incluyendo el modelo propuesto en la investigación. Se buscó utilizar los mismos hiperparámetros en todos los modelos con el objetivo de establecer una comparación equitativa y objetiva de su rendimiento.
+
+En la configuración de cada modelo, se dividió el conjunto de datos en una proporción del 80\% para entrenamiento y un 20\% para validación. Durante cada proceso de entrenamiento, se definieron las métricas utilizadas para evaluar los resultados. Dichas métricas y los hiperparámetros empleados se documentaron utilizando herramientas como Wandb, que facilitaron el seguimiento y trazabilidad de la ejecución de los experimentos. En caso de incompatibilidad de algún modelo con dicha herramienta, se recurrió a un registro de pruebas para almacenar la información pertinente.
+
+Finalmente, se recogieron los resultados del proceso de entrenamiento y validación, así como el archivo de pesos correspondiente a la época de mayor precisión en el conjunto de datos de validación.
+ 
+\subsection{Posprocesamiento}
+
+Una vez que se entrenaron los modelos de segmentación semántica, se utilizó el archivo de pesos correspondiente para llevar a cabo la segmentación de las imágenes multibanda de la Cordillera Vilcabamba. A diferencia de las imágenes de la Cordillera Blanca, estas no se emplearon para la generación de mosaicos hasta este punto. Sin embargo, debido a la arquitectura del modelo, en esta etapa del proceso se generaron mosaicos en formato TIFF de 256x256, conservando la información de posicionamiento, sin la necesidad de realizar ninguna técnica de aumento de datos.
+
+A continuación, se procedió a realizar la segmentación utilizando el archivo de pesos mencionado anteriormente, el cual contenía los parámetros de la red neuronal en la época con la mejor precisión obtenida. Una vez generadas las máscaras segmentadas por la red, se utilizó la información de posicionamiento almacenada para cada mosaico, permitiendo la reconstrucción de la forma de la imagen original con los valores segmentados por el modelo de segmentación.
+
+Finalmente, se llevó a cabo la vectorización de los resultados. Dado que la imagen segmentada conservaba la información de glaciares limpios y cubiertos en forma de valores de píxeles, fue posible generar los dos tipos de polígonos requeridos para la evaluación de resultados.
+
+\subsection{Evaluación de resultados}
+
+Se llevaron a cabo dos tipos de evaluaciones de los resultados obtenidos. La primera se basó en las métricas conseguidas durante el proceso de entrenamiento y validación de los modelos. Estas métricas incluyeron: Overall Accuracy, Precisión, Recall, F1-Score, Coeficiente de Dice y, principalmente, Intersection Over Union (IoU). La evaluación de estos resultados se realizó a través de tablas resumen que compararon las métricas obtenidas entre los diferentes experimentos realizados.
+
+Por otro lado, se efectuó una comparación de los resultados alcanzados tras el posprocesamiento con las imágenes destinadas para las pruebas, específicamente las imágenes de la Cordillera Vilcabamba. Además, se llevó a cabo una comparación a nivel de datos vectoriales para determinar el error en términos de distancia en $km^2$ entre los polígonos de segmentación correspondientes al inventario y los polígonos generados por los modelos de segmentación semántica, incluyendo el modelo propuesto en la presente tesis.

@@ -1,0 +1,38 @@
+\section{Operacionalización de variables}
+\label{sec:OperacionalizacionVariables}
+
+El Cuadro~\ref{tab:OperacionalizacionVariables} se muestra la operacionalización de las variables de investigación.
+
+\begin{landscape}
+\begin{table}
+\caption{Operacionalización de variables de la investigación}
+\footnotesize
+\begin{tabularx}{\linewidth}{@{} *5{X} @{}}
+\hline
+\textbf{Variables} & \textbf{Tipo} & \textbf{Dimensión} & \textbf{Indicadores} \\ \hline
+\multirow{11}{=}{\parbox{4cm}{Modelo de segmentación semántica basado en aprendizaje profundo}} & \multirow{11}{=}{\parbox{4cm}{Variable independiente}} & \multirow{4}{=}{\parbox{4cm}{Arquitectura del modelo}} & - Número de capas. \\ &  &  & - Número de parámetros. \\
+ &  &  & - Tasa de aprendizaje. \\
+ &  &  & - Función de pérdida. \\ \cline{3-4}
+ &  & Función de activación & - Función de activación utilizada en las capas ocultas. \\ \cline{3-4}
+ &  & Algoritmo de optimización & - Algoritmo utilizado para optimizar el modelo. \\ \cline{3-4}
+ &  & \multirow{5}{*}{Conjunto de datos} & - Número de muestras. \\
+ &  &  & - Número de muestras utilizadas en el entrenamiento. \\
+ &  &  & - Número de muestras utilizadas en la validación. \\
+ &  &  & - Número de canales. \\
+ &  &  & - Número de clases. \\ \hline
+\multirow{8}{=}{\parbox{4cm}{Efectividad del mapeo de glaciares limpios y cubiertos en imágenes satelitales}} & \multirow{8}{=}{\parbox{4cm}{Variable dependiente}} & \multirow{6}{=}{\parbox{4cm}{Precisión}} & - IoU. \\
+ &  &  & - Dice. \\
+ &  &  & - Accuracy. \\
+ &  &  & - Precision. \\
+ &  &  & - Recall. \\
+ &  &  & - F1 Score. \\ \cline{3-4} 
+ &  & Tiempo & - Tiempo requerido para la segmentación semántica en la etapa de pruebas. \\ \cline{3-4}
+ &  & Calidad & - Porcentaje de error en la delimitación de glaciares. \\ \hline
+\end{tabularx}
+\begin{minipage}{\textwidth}
+    \vspace{10pt}
+    \reference{Elaborado por el autor.}
+    \label{tab:OperacionalizacionVariables}
+\end{minipage}
+\end{table}
+\end{landscape}

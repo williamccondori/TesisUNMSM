@@ -1,0 +1,33 @@
+# Archivos generados por LaTeX
+*.aux
+*.log
+*.synctex.gz
+*.out
+*.fls
+*.fdb_latexmk
+*.toc
+*.lof
+*.lot
+*.bbl
+*.blg
+*.idx
+*.ind
+*.ilg
+*.bcf
+*.run.xml
+*.nav
+*.snm
+
+# Archivos específicos de proyectos que pueden contener información sensible o personal
+*.tex.swo
+*.tex.swp
+*.tex.backup
+
+# Carpetas que pueden contener archivos de salida o temporales
+/bin/
+/build/
+/out/
+
+# Carpetas y archivos de configuración de VSCode
+.vscode/
+settings.json

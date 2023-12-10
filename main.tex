@@ -1,0 +1,502 @@
+\documentclass[12pt]{report}
+
+% Idioma.
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+
+\usepackage{tabularx}
+\usepackage{float} 
+\usepackage{amsmath,amssymb}
+\usepackage{paracol}
+\usepackage{titlesec} 
+\usepackage{glossaries}
+
+\usepackage{graphicx}
+
+% Tipo de letra.
+\usepackage[T1]{fontenc} % Codificación de fuentes.
+\usepackage{mathptmx} % Times New Roman.
+% \usepackage{tgpagella} % Palatino.
+% \usepackage{mathpazo}  % Palatino.
+
+\usepackage{caption} % Paquete caption.
+\usepackage{chngcntr} % Paquete chngcntr.
+
+% Agrega esto al inicio de tu documento.
+\usepackage{pdflscape}
+\usepackage{ltablex}
+\usepackage{multirow}
+
+% Configuración de los captions.
+\newcommand{\reference}[1]{\textit{Fuente.} #1}
+
+% Configuración del formato del caption de las figuras.
+\DeclareCaptionFormat{figureformat}{\textit{#1}. \textbf{#3}}
+\captionsetup[figure]{format=figureformat, labelsep=period, belowskip=5pt, singlelinecheck=false, justification=raggedright}
+
+% Conteo global de figuras.
+\counterwithout{figure}{chapter}
+
+% Configuración del formato del caption de los cuadros.
+\DeclareCaptionFormat{tableformat}{\textit{#1}. \textbf{#3}}
+\captionsetup[table]{format=tableformat, labelsep=period, singlelinecheck=false, justification=raggedright}
+
+% Conteo global de cuadros.
+\counterwithout{table}{chapter}
+
+\titleformat{\chapter}[block]{\LARGE\bfseries}{\MakeUppercase{CAPÍTULO} \thechapter \newline}{1em}{}
+
+% Configuración de las referencias y los enlaces.
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{apacite}
+
+% Se desabilitan advertencias.
+\hbadness=10000
+\hfuzz=50pt
+
+% Configuración del espaciado del documento.
+\usepackage[a4paper]{geometry}
+\geometry{
+    a4paper,
+    top=2.5cm,
+    left=4.0cm,
+    right=2.5cm,
+    bottom=2.5cm
+}
+\setlength{\parskip}{2.5mm}
+\setlength{\parindent}{0mm}
+\setlength{\headheight}{15pt}
+
+\title{Modelo de segmentación semántica basado en Deep Learning para el mapeo semiautomático de glaciares limpios y cubiertos en imágenes satelitales}
+\author{William Condori Quispe} 
+
+% Configuración de la numeración de la página.
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{} % Limpia todos los encabezados y pies de página anteriores.
+\fancyhead[R]{\thepage} % Número de página en la parte superior derecha.
+\renewcommand{\headrulewidth}{0pt} % Elimina la línea horizontal en el encabezado.
+
+
+\usepackage{etoolbox}
+% Redefinición del estilo de página para el índice de contenidos.
+\patchcmd{\tableofcontents}{\@starttoc}{\thispagestyle{fancy}\@starttoc}{}{}
+\patchcmd{\listoftables}{\@starttoc}{\thispagestyle{fancy}\@starttoc}{}{}
+\patchcmd{\listoffigures}{\@starttoc}{\thispagestyle{fancy}\@starttoc}{}{}
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\begin{document}
+
+\renewcommand{\BOthers}[1]{et al.\hbox{}}
+
+\input{cover.tex}
+
+\pagenumbering{roman}
+
+\chapter*{Dedicatoria}
+\thispagestyle{fancy} % Aplica el estilo de página a la primera página del capítulo.
+
+\begin{paracol}{2}
+\switchcolumn
+\begin{flushright}
+
+\end{flushright}
+\end{paracol}
+
+% Agradecimientos.
+\chapter*{Agradecimientos}
+\thispagestyle{fancy} % Aplica el estilo de página a la primera página del capítulo.
+
+% Generación de la tabla de contenidos.
+\tableofcontents
+\thispagestyle{fancy} % Aplica el estilo de página al índice de contenidos.
+
+% Generación de la tabla de cuadros.
+\listoftables
+
+% Generación de la tabla de figuras.
+\listoffigures
+
+\chapter{INTRODUCCIÓN}
+\thispagestyle{fancy} % Aplica el estilo de página a la primera página del capítulo.
+
+\pagenumbering{arabic} % Se cambia el formato de número de página.
+\setcounter{page}{1} % Se empieza del número 1.
+
+\input{Introduccion/SituacionProblematica}
+
+\input{Introduccion/FormulacionProblema}
+
+\input{Introduccion/Justificacion}
+
+\input{Introduccion/Objetivos}
+
+\input{Introduccion/Propuesta}
+
+\input{Introduccion/Hipotesis}
+
+\input{Introduccion/Variables}
+
+\input{Introduccion/OperacionalizacionVariables}
+
+\input{Introduccion/OrganizacionDocumento}
+
+\chapter{MARCO TEÓRICO}
+\label{chp:MarcoTeorico}
+\thispagestyle{fancy} % Aplica el estilo de página a la primera página del capítulo.
+
+\input{MarcoTeorico/AntecedentesInvestigacion}
+
+\input{MarcoTeorico/BasesTeoricas}
+
+\chapter{METODOLOGÍA}
+\label{chp:Metodologia}
+\thispagestyle{fancy} % Aplica el estilo de página a la primera página del capítulo.
+
+\input{Metodologia/TipoDisenoInvestigacion}
+
+\input{Metodologia/UnidadAnalisis}
+
+\input{Metodologia/PoblacionEstudio}
+
+\input{Metodologia/TamanoMuestra}
+
+\input{Metodologia/SeleccionMuestra}
+
+\input{Metodologia/TecnicaRecoleccionDatos}
+
+\input{Metodologia/AnalisisInterpretacionInformacion}
+
+\chapter{PROPUESTA}
+\label{chp:Propuesta}
+\thispagestyle{fancy} % Aplica el estilo de página a la primera página del capítulo.
+
+ 
+La realización de un estudio glaciológico implica la ejecución de diversas etapas consecutivas, que abarcan una serie de tareas tanto en gabinete como en campo. Las tareas en gabinete comprenden el análisis bibliográfico inicial, la adquisición de datos históricos, la exploración de enfoques previos y, de manera predominante, el análisis de la información compilada para la creación de modelos \cite{ermolin2015ambientes}. Esta información recopilada puede ser obtenida en el campo a través de visitas y recolección de muestras. Sin embargo, debido a la alta complejidad asociada con el acceso a los glaciares, se han incorporado otras técnicas como la adquisición de datos de manera remota mediante teledetección.
+
+\section{Obtención de datos}
+
+
+En el siguiente cuadro se listan las imágenes Sentinel-2 utilizadas correspondientes a la Cordillera Blanca:
+
+\begin{table}[H]
+   \centering
+   \caption{Listado de imágenes satelitales}
+   \label{tab:listado-imagenes-satelitales-blanca}
+   \begin{tabularx}{1\textwidth}{cXcc} 
+\hline
+\textbf{Fecha} & \textbf{Identificador} & \textbf{Resolución espacial (m)} & \textbf{Nivel} \\
+\hline
+28/07/2016 & S2A\_OPER\_MSI\_L1C\_TL\_MTI\_\_2016
+0728T215553\_A005742\_T17 & 10 - 20 - 60 & L1C \\
+15/11/2016 & S2A\_OPER\_MSI\_L1C\_TL\_SGS\_\_2016
+1115T202633\_A007315\_T17 & 10 - 20 - 60 & L1C \\
+28/07/2016 & S2A\_OPER\_MSI\_L1C\_TL\_MTI\_\_2016
+0728T215553\_A005742\_T18 & 10 - 20 - 60 & L1C \\
+15/11/2016 & S2A\_OPER\_MSI\_L1C\_TL\_MTI\_\_2016
+1115T215249\_A007315\_T18 & 10 - 20 - 60 & L1C \\
+\hline
+\end{tabularx}
+\end{table}
+
+En el siguiente cuadro se listan las imágenes Sentinel-2 utilizadas correspondientes a la Cordillera Vilcabamba:
+
+\begin{table}[H]
+   \centering
+   \caption{Listado de imágenes satelitales}
+   \label{tab:listado-imagenes-satelitales-vilcabamba}
+   \begin{tabularx}{1\textwidth}{cXcc} 
+\hline
+\textbf{Fecha} & \textbf{Identificador} & \textbf{Resolución espacial (m)} & \textbf{Nivel} \\
+\hline
+28/07/2016 & S2A\_OPER\_MSI\_L1C\_TL\_MTI\_\_2016
+0728T215553\_A005742\_T17 & 10 - 20 - 60 & L1C \\
+15/11/2016 & S2A\_OPER\_MSI\_L1C\_TL\_SGS\_\_2016
+1115T202633\_A007315\_T17 & 10 - 20 - 60 & L1C \\
+28/07/2016 & S2A\_OPER\_MSI\_L1C\_TL\_MTI\_\_2016
+0728T215553\_A005742\_T18 & 10 - 20 - 60 & L1C \\
+15/11/2016 & S2A\_OPER\_MSI\_L1C\_TL\_MTI\_\_2016
+1115T215249\_A007315\_T18 & 10 - 20 - 60 & L1C \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Descarga de imágenes SENTINEL-2}
+
+\subsubsection{Cordillera Blanca}
+
+\subsubsection{Cordillera Vilcabamba}
+
+Se incorporó una imagen adicional al inventario de glaciares tras la identificación de una porción limitada del área que no estaba cubierta por las imágenes satelitales previamente definidas.
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=1\textwidth]{Images/imagen_geometria_adicional.png}
+   \label{fig:gan1}
+   \caption[Escasez de cobertura glaciar en la cordillera Vilcabamba según imágenes satelitales encontradas y el inventario de glaciares del Perú de 2018.]{Escasez de cobertura glaciar en la cordillera Vilcabamba según imágenes satelitales encontradas y el inventario de glaciares del Perú de 2018. Las imágenes satelitales encontradas revelan una falta de cobertura glaciar en el área señalada. El polígono verde muestra la extensión total de la cordillera Vilcabamba, mientras que el cuadro rojo destaca el área que no está cubierta por las imágenes satelitales incluidas en el inventario de glaciares del Perú de 2018.}
+   \caption*{Fuente. Elaboración propia.}
+\end{figure}
+
+\begin{figure}[H]
+   \centering
+   \includegraphics[width=1\textwidth]{Images/imagen_vilcabamba.png}
+   \label{fig:gan2}
+   \caption{Arquitectura de una Generative Adversarial Network}
+   \caption*{Fuente. }
+\end{figure}
+
+
+
+Todas las imágenes descargadas fueron organizadas en carpetas según el área de estudio.
+
+Posteriormente, se realizó la corrección atmosférica de cada una de las imágenes, para ello se hizo uso del software de procesamiento SNAP
+
+
+
+
+\section{Pre-procesamiento}
+
+\subsection{Generación de máscaras}
+
+Se utilizó el software de procesamiento geoespacial ArcGIS Pro para generar las máscaras correspondientes a las imágenes. En este caso, las máscaras se generaron a partir de los polígonos resultantes del Inventario Nacional de Glaciares del Perú (2018). Para llevar a cabo este proceso, fue necesario disponer de una imagen generada mediante la combinación de las bandas, la cual proporcionó los datos de posicionamiento y el sistema de coordenadas para la nueva máscara.
+
+En primer lugar, se cargaron tanto el polígono como la imagen satelital con las bandas combinadas. A continuación, en ArcGIS Pro, se accedió a la pestaña “View” del menú principal y se seleccionó "Geoprocessing". Dentro de la pestaña “Toolboxes”, que ofrece diversas herramientas para el análisis de información geoespacial, se utilizó la herramienta “Feature to raster” ubicada en la sección “Conversion Tools”. La ubicación de esta herramienta se muestra en la Figura~\ref{fig:geoprocessing}.
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[width=1\textwidth]{Images/geoprocessing.png}
+   \caption{Ubicación de la herramienta “Feature to raster” en la pestaña “Toolboxes” de ArcGIS Pro.}
+   \caption*{Fuente. Elaboración propia}
+   \label{fig:geoprocessing}
+\end{figure} 
+
+La herramienta “Feature to raster” se utiliza para convertir un vector de elementos en una imagen raster. Para ello, se deben emplear ciertos parámetros.
+
+En primer lugar, se especifica el nombre de los elementos de entrada, que en este caso corresponde a los polígonos del Inventario de Glaciares del Perú. Luego, se selecciona el campo que la herramienta utilizará para asignar valores categorizados a la imagen raster. En este caso, se eligió la columna “Tipo”, que representa el tipo de glaciar identificado en cada polígono. Esta asignación de valores por píxel basada en el tipo de glaciar será útil para el entrenamiento del modelo, ya que las clases a identificar son precisamente “Glaciar limpio” y “Glaciar cubierto”. Además, se asigna un nombre de salida a la imagen raster, en este caso “output.tif”. Por último, se establece el tamaño de píxel de la nueva imagen, el cual debe coincidir con el tamaño del píxel de la imagen de referencia (imagen satelital con las bandas combinadas). Esto es crucial para garantizar una alineación adecuada. En la Figura~\ref{fig:generacion_mascara} se muestra una representación visual de los parámetros utilizados para generar la máscara mediante la herramienta “Feature to raster”.
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[width=1\textwidth]{Images/generacion_mascara.png}
+   \caption{Parámetros empleados en la generación de una máscara a partir del polígono del Inventario Nacional de Glaciares del Perú.}
+   \caption*{Fuente. Elaboración propia}
+   \label{fig:generacion_mascara}
+\end{figure}
+
+En la pestaña de “Environments” se configuraron los parámetros avanzados para la generación de la máscara. Se empleó la imagen satelital con las bandas combinadas como imagen de referencia, ya que la máscara resultante busca ser una representación exacta de los tipos de glaciares presentes en dicha imagen.
+
+El primer parámetro requerido fue el sistema de coordenadas de salida. La herramienta permitió seleccionar el sistema de coordenadas que corresponde a la imagen de referencia. En este caso, el sistema de coordenadas empleado fue \textit{WGS 1984 UTM ZONE 18S}.
+
+El segundo parámetro requerido fue la extensión geográfica de salida. Al igual que en el caso anterior, la herramienta proporcionó la opción de emplear la extensión geográfica de la imagen de referencia. Esto aseguró una correcta alineación espacial de la máscara con respecto a la imagen de referencia.
+
+Otros parámetros adicionales comprendieron la selección de técnicas de resampleado. En este contexto, se tomó la decisión de utilizar el resampleado cúbico “CUBIC”, el cual ha sido previamente empleado en el proceso de resampleado de las imágenes Sentinel-2. Además, se especificó que no se aplicara compresión de datos, dado que la información de la máscara se almacenó en formato “uint8” y no requiere de dicho proceso de compresión.
+
+Finalmente, se estableció el tamaño de los mosaicos que conformarán la imagen raster. Se fijó un valor de 256 píxeles de alto y 256 píxeles de ancho, que se utilizará para generar los mosaicos que serán empleados por el modelo en etapas posteriores. La configuración de estos parámetros se muestra en la Figura~\ref{fig:generacion_mascara_02}.
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[width=1\textwidth]{Images/generacion_mascara_02.png}
+   \caption{Parámetros avanzados empleados en la generación una máscara a partir del polígono del Inventario Nacional de Glaciares del Perú.}
+   \caption*{Fuente. Elaboración propia}
+   \label{fig:generacion_mascara_02}
+\end{figure}
+
+Como se mencionó anteriormente, la imagen resultante corresponde a una máscara que representa los valores de los diferentes tipos de glaciares presentes en la imagen de referencia. Por lo tanto, fue de vital importancia garantizar una correspondencia precisa en cuanto a la posición y el sistema de coordenadas para lograr una asignación correcta de las clases a los píxeles correspondientes. En la Figura~\ref{fig:referencia_mascara} se presentan los resultados obtenidos del proceso. En primer lugar, se muestra la máscara generada, seguida de la imagen de referencia.
+
+\subsection{Generación de mosaicos}
+
+\begin{table}[H]
+   \centering
+   \caption{Cantidad de mosaicos obtenidos por cada imagen satelital (Cordillera Blanca)}
+   \begin{tabularx}{1\textwidth}{Xc} 
+\hline
+\textbf{Código de imagen} & \textbf{N° de mosaicos} \\
+\hline
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T17LRL\_20230509
+T204920 & 1936 \\
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T18LTQ\_20230509
+T212616 & 1849 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T17LRL\_20230509
+T190433 & 1936 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T194206 & 1849 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T201628 & 1849 \\
+\hline
+\textbf{TOTAL} & 9419 \\
+\hline
+\end{tabularx}
+   \label{tab:tiles_desde_imagenes}
+\end{table}
+
+Posteriormente, se realizó un análisis individual de cada mosaico con el fin de identificar aquellos que no contenían datos o que estaban completamente compuestos por fondo. Este proceso se llevó a cabo con la finalidad de preservar únicamente los mosaicos que presentaban al menos una clase y así evitar el desequilibrio de clases durante el entrenamiento de la red neuronal. Los resultados de este procedimiento se muestran en la siguiente tabla:
+
+\begin{table}[H]
+   \centering
+   \caption{Cantidad de mosaicos con presencia de información extraídos de cada imagen satelital (Cordillera Blanca)}
+   \begin{tabularx}{1\textwidth}{Xc} 
+\hline
+\textbf{Código de imagen} & \textbf{N° de mosaicos} \\
+\hline
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T17LRL\_20230509
+T204920 & 110 \\
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T18LTQ\_20230509
+T212616 & 208 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T17LRL\_20230509
+T190433 & 32 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T194206 & 59 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T201628 & 208 \\
+\hline
+\textbf{TOTAL} & 617 \\
+\hline
+\end{tabularx}
+   \label{tab:tiles_desde_imagenes_con_datos}
+\end{table}
+
+
+\subsection{Data Augmentation}
+
+
+\begin{figure}[H]
+   \centering 
+   \includegraphics[width=1\textwidth]{Images/VisualizacionMosaicoImagenMascara.png}
+   \caption{Visualización de la correspondencia entre un mosaico aleatorio de una imagen multibanda (a) y su máscara asociada (b).}
+   \caption*{Fuente. Elaboración propia}
+   \label{fig:VisualizacionMosaicoImagenMascara}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\textwidth]{Images/AumentoDeDatos.pdf}
+\caption{Transformaciones de Data Augmentation: HorizontalFlip, VerticalFlip y RandomRotate90 aplicadas a la imagen y su máscara correspondiente.}
+{\label{fig:AumentoDeDatos} \textit{Fuente}. Elaboración propia}
+\end{figure}
+
+\begin{figure}[H]
+\centering 
+\includegraphics[width=1\textwidth]{Images/AumentoDeDatos2.pdf}
+\caption{Transformaciones de Data Augmentation: ElasticTransform y GridDistortion aplicadas a la imagen y su máscara correspondiente.}
+{\label{fig:AumentoDeDatos2} \textit{Fuente}. Elaboración propia}
+\end{figure}
+
+La aplicación de estas transformaciones incrementó cinco veces el número total de mosaicos para cada imagen satelital, como se muestra en el Cuadro~\ref{tab:MosaicosConAumentoDatos}.
+
+\begin{table}[H]
+   \centering
+   \caption{Número total de mosaicos generados por imagen satelital después de aplicar Data Augmentation (Cordillera Blanca)}
+   \begin{tabularx}{1\textwidth}{Xc} 
+\hline
+\textbf{Código de imagen} & \textbf{N° de mosaicos} \\
+\hline
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T17LRL\_20230509
+T204920 & 550 \\
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T18LTQ\_20230509
+T212616 & 1040 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T17LRL\_20230509
+T190433 & 160 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T194206 & 295 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T201628 & 1040 \\
+\hline
+\textbf{TOTAL} & 3085 \\
+\hline
+\end{tabularx}
+\label{tab:MosaicosConAumentoDatos}
+\end{table}
+
+Finalmente, se procedió a combinar los mosaicos generados con los mosaicos utilizados inicialmente en el proceso de Data Augmentation. Como resultado de esta combinación, se obtuvo el número total de mosaicos que se muestra en el Cuadro~\ref{tab:MosaicosConAumentoDatosFinal}.
+
+\begin{table}[H]
+   \centering
+   \caption{Número total de mosaicos obtenidos por imagen satelital después de aplicar Data Augmentation (Cordillera Blanca)}
+   \begin{tabularx}{1\textwidth}{Xc} 
+\hline
+\textbf{Código de imagen} & \textbf{N° de mosaicos} \\
+\hline
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T17LRL\_20230509
+T204920 & 660 \\
+S2A\_MSIL2A\_20160728T152642\_N9999\_R025\_T18LTQ\_20230509
+T212616 & 1248 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T17LRL\_20230509
+T190433 & 192 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T194206 & 354 \\
+S2A\_MSIL2A\_20161115T152642\_N9999\_R025\_T18LTQ\_20230509
+T201628 & 1248 \\
+\hline
+\textbf{TOTAL} & 3702 \\
+\hline
+\end{tabularx}
+\label{tab:MosaicosConAumentoDatosFinal}
+\end{table}
+
+\subsection{Consolidación del conjunto de datos}
+
+
+\subsection{Distribución del conjunto de datos}
+
+
+\section{Implementación del modelo de Deep Learning}
+
+Para el desarrollo del modelo  de Deep Leaning se utilizó la librería PyTorch,
+la cual, es una librería de código abierto para el desarrollo de modelos de Deep Learning.
+Esta librería permite la implementación de modelos de Deep Lear 
+\section{Proceso de entrenamiento y validación}
+
+\chapter{Experimentos}
+
+\section{Selección de bandas espectrales Sentinel-2}
+
+La primera combinación de bandas incorpora la totalidad del conjunto de bandas disponibles tras la aplicación de la corrección atmosférica a la imagen original. Esta selección se realiza con la intención de suministrar al modelo propuesto la máxima cantidad de contexto e información disponible, lo que podría conducir a un mejor rendimiento en la segmentación de glaciares. Sin embargo, es importante destacar que esta combinación, al tener la mayor cantidad de bandas para analizar, es la más exigente en términos de recursos computacionales.
+
+La segunda combinación de bandas comprende las bandas correspondientes al espectro electromagnético visible para los humanos: Rojo, Verde y Azul, comúnmente conocidas como RGB. Esta combinación fue seleccionada debido a su prevalencia en imágenes de alta resolución, como las disponibles en plataformas como Google Earth y en fotografías aéreas. La combinación RGB es la más utilizada para representar imágenes, lo que justifica su inclusión en este estudio.
+
+La tercera combinación de bandas añade la banda del Infrarrojo Cercano (NIR) a la combinación RGB previamente descrita. Esta selección se efectuó para examinar el rendimiento del modelo propuesto en la segmentación de imágenes satelitales que ofrecen exclusivamente estas cuatro bandas, como es el caso de PeruSat-1. Este satélite de observación, desarrollado por Airbus Defence \& Space, y lanzado en 2016, es relevante para el estudio debido a que proporciona imágenes multiespectrales y pancromáticas de alta resolución (0.7m). Sin embargo, no incluye la banda de Infrarrojo de Onda Corta (SWIR), necesaria para el cálculo del Índice Normalizado de Diferencia de Nieve (NDSI), un índice ampliamente utilizado para la segmentación de glaciares. Además, la relevancia de PeruSat-1 para este estudio radica en que el área de investigación corresponde al país que opera dicho satélite.
+
+La cuarta combinación de bandas se compone de la banda Verde y la banda de Infrarrojo de Onda Corta (SWIR), ambas esenciales para el cálculo del NDSI. Esta combinación, al estar formada por el menor número de bandas, requiere menos recursos computacionales para el procesamiento. Esta característica la hace relevante para el estudio, ya que estas bandas podrían contener información espectral significativa para la segmentación de glaciares sin la necesidad de utilizar la información de otras bandas.
+
+La quinta y última combinación de bandas incorpora la banda de Infrarrojo Cercano (NIR) a las bandas Verde y de Infrarrojo de Onda Corta (SWIR) de la combinación anterior. La inclusión de la banda NIR junto a la banda Verde posibilita la utilización de las entradas necesarias para el cálculo del Índice Normalizado de Diferencia de Agua (NDWI). Este índice es comúnmente empleado para diferenciar entre glaciares y lagunas de origen glaciar aledañas, ya que estas últimas podrían causar sobre estimaciones en la segmentación de glaciares.
+ 
+\begin{table}[H]
+   \centering
+   \caption{Combinaciones de bandas espectrales empleadas en el análisis}
+   \begin{tabularx}{1\textwidth}{lX} 
+\hline
+\textbf{Combinaciones} & \textbf{Bandas} \\
+\hline
+C01 & B01, B02, B03, B04, B05, B06, B07, B08, B8A, B09, B11, B12 \\
+C02 & B02, B03, B04 \\
+C03 & B02, B03, B04, B08 \\
+C04 & B03, B11 \\
+C05 & B03, B04, B08, B11 \\
+\hline
+\end{tabularx}
+\label{tab:CombinacionesBandasEspectrales}
+\end{table}
+
+
+
+\chapter{Resultados}
+
+\chapter{Conclusiones}
+
+
+%En primer lugar, es importante destacar que los glaciares son un recurso natural valioso y estratégico, y su estudio y monitoreo es esencial para comprender su dinámica y su impacto en el clima y el medio ambiente. La teledetección es una herramienta valiosa para estudiar los glaciares, ya que permite obtener imágenes y datos desde una perspectiva espacial. El espectro electromagnético es fundamental para entender cómo la luz y la radiación interactúan con el hielo y la nieve de los glaciares.
+
+%En segundo lugar, se puede apreciar la importancia de las técnicas de inteligencia artificial y aprendizaje automático para el procesamiento y análisis de imágenes satelitales, con el objetivo de obtener información precisa y detallada sobre los glaciares. El uso de algoritmos de aprendizaje automático y redes neuronales profundas permite automatizar y mejorar la precisión de los análisis, lo que es esencial para una buena comprensión de los glaciares.
+
+%Por último, se puede concluir que el estudio de los glaciares es un campo interdisciplinario que combina la glaciología, la teledetección, la física y la inteligencia artificial. El monitoreo y la investigación de los glaciares son esenciales para entender su dinámica, su impacto en el clima y el medio ambiente y tomar medidas para mitigar los efectos del cambio climático y la pérdida de masa glaciar.
+
+
+%Este trabajo es crucial para entender el impacto del cambio climático en los glaciares tropicales, donde se ha observado un aumento en la formación de lagunas y bofedales debido al derretimiento del hielo glaciar. Es esencial mantener un monitoreo constante de estos glaciares para tomar decisiones informadas sobre las reservas de agua. La investigación futura debería concentrarse en sistematizar los procesos de extracción de los límites de los glaciares en las imágenes satelitales con el fin de obtener una base de datos más consistente y de mejor calidad para usos científicos.
+
+
+\chapter{Recomendaciones}
+
+\bibliographystyle{apacite}
+\bibliography{references.bib}
+
+\end{document}

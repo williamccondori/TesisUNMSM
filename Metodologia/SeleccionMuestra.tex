@@ -1,0 +1,21 @@
+\section{Selección de muestra}
+\label{sec:SeleccionMuestra}
+
+En el contexto de la presente investigación, se adoptó un enfoque de muestreo no probabilístico aplicado a una población finita específica. Este enfoque combinó técnicas de muestreo por conveniencia y muestreo por juicio de expertos.
+
+El muestreo por conveniencia tuvo lugar al seleccionar el área de estudio, lo cual se debió principalmente a la disponibilidad de datos ya establecidos en el Inventario de Glaciares de Perú. Este inventario fue llevado a cabo en 2018 por el Instituto Nacional de Investigación en Glaciares y Ecosistemas de Montaña. Se encontró que se contaba con información de primera mano, validada y aprobada por la entidad encargada del análisis de ecosistemas de montaña en Perú. Gracias a esto, se pudo obtener la información vectorial correspondiente a la delimitación de glaciares limpios y cubiertos. Esta información resultó de vital importancia, ya que posibilitó la creación automatizada de "máscaras", un paso clave para el entrenamiento de los modelos de segmentación semántica.
+
+Además, se disponía de información acerca del proceso metodológico empleado para la realización de dicho inventario, lo que permitió obtener detalles sobre la metodología utilizada, las características geológicas y morfológicas de cada cordillera con presencia glaciar, información histórica estructurada e información utilizada para el proceso de identificación, incluyendo una lista de las imágenes satelitáles utilizadas, modelos digitales de elevación, imágenes de radar, imágenes de alta resolución, el software utilizado y el proceso de recopilación de resultados.
+
+Por otro lado, se utilizó el muestreo por juicio de expertos, el cual se basó en la elección de imágenes satelitales mediante la experiencia y conocimiento de especialistas en glaciología y teledetección que participaron en el inventario de glaciares previamente mencionado. Estos expertos aportaron su juicio y criterio para seleccionar las imágenes más adecuadas, considerando los siguientes factores:
+
+\begin{enumerate} 
+    \item Imágenes satelitales obtenidas durante el periodo comprendido entre los meses de julio y noviembre.
+    \item Porcentaje de nubosidad menor al 10\%.
+    \item Escasa o nula cobertura de nieve temporal.
+    \item Año base 2016.
+\end{enumerate}
+
+El primer criterio se alinea con el tercer criterio, ya que se aplica durante los meses de temporada seca. Durante este período, la nieve estacional es claramente identificable, lo que facilita su distinción de la nieve glaciar \cite{reserva2021}. Según \citeA{inaigem2017manual}, se considera de gran importancia utilizar imágenes satelitales multiespectrales con un bajo porcentaje de nubosidad (menor al 10\%). Esto con el objetivo de obtener una mayor información espectral de los glaciares, evitando interferencias que pudieran resultar en posibles errores en la identificación. Finalmente, el año base (2016) corresponde al año en el cual se llevó a cabo el proceso de identificación y clasificación de los glaciares presentes en el Inventario Nacional de Glaciares de Perú publicado en el año 2018.
+
+Aunque en la presente investigación predominó el uso de imágenes satelitales multiespectrales, adicionalmente se emplearon modelos digitales de elevación con una resolución espacial de 12.5 metros, extraídos de las imágenes proporcionadas por el satélite ALOS-PALSAR, los cuales facilitaron la generación de diversos productos, incluyendo curvas de nivel, modelos de sombreado, así como mapas de orientación y pendiente.
