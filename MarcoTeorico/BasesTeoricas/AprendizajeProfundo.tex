@@ -197,13 +197,13 @@ Esta función es especialmente útil en problemas de clasificación multi clase 
 \textbf{\textit{ReLU:}} Es generalmente utilizada en redes neuronales profundas. Las funciones de activación mencionadas anteriormente tienen a desvanecer en la etapa de retro propagación cuando la red presenta muchas capas \cite{aghdam2017guide}. Una ReLU está dada por:
 
 \begin{equation}
-    f_{relu}(x) = max(0,x)
+    f_{ReLU}(x) = max(0,x)
 \end{equation}
 
 Su derivada está dada por:
 
 \begin{equation}
-    {f}'_{relu}(x) = \left\{\begin{matrix}
+    {f}'_{ReLU}(x) = \left\{\begin{matrix}
         0 & x < 0         \\
         1 & x \geqslant 0
     \end{matrix}\right.
@@ -223,7 +223,7 @@ Esta función no lineal funciona muy bien en la práctica, su derivada cuando $ 
 \textbf{\textit{Leaky ReLU:}} Busca resolver el problema de las neuronas muestras presentes en la función ReLU. La función leaky ReLU está dada por:
 
 \begin{equation}
-    {f}_{rrelu}(x) = \left\{\begin{matrix}
+    {f}_{Leaky ReLU}(x) = \left\{\begin{matrix}
         \alpha x & x < 0         \\
         x        & x \geqslant 0
     \end{matrix}\right.
@@ -232,7 +232,7 @@ Esta función no lineal funciona muy bien en la práctica, su derivada cuando $ 
 Y su derivada por:
 
 \begin{equation}
-    {f}'_{rrelu}(x) = \left\{\begin{matrix}
+    {f}'_{Leaky ReLU}(x) = \left\{\begin{matrix}
         \alpha & x < 0         \\
         1      & x \geqslant 0
     \end{matrix}\right.
@@ -318,7 +318,7 @@ Donde \(\delta^{(l)}\) es el vector de error para la capa \(l\), \(W^{(l+1)}\) s
 
 Esta metodología asegura que cada paso del aprendizaje se enfoque en reducir la función de pérdida, guiando así a la red hacia una mejor precisión en la tarea que realiza.
 
-\subsubsection{Redes Neuronales Convolucionales (CNNs)}
+\subsubsection{Redes neuronales convolucionales (CNNs)}
 Son arquitecturas de redes neuronales diseñadas específicamente para procesar datos en formato de matriz bidimensional, como las imágenes. Estas estructuras de red se componen de varias capas que aplican filtros (convoluciones) a los datos de entrada para extraer características significativas \cite{geron2019hands}.
 
 \begin{figure}[H]
@@ -438,29 +438,29 @@ Los avances en el campo de las redes neuronales convolucionales han propiciado e
 En el Cuadro~\ref{tab:ArquitecturasCnn} se presentan las características principales de las arquitecturas de redes neuronales convolucionales más relevantes para la segmentación de objetos.
 
 \begin{table}[H]
-    \centering
-    \begin{tabular}{|l|l|l|p{6cm}|}
+    \caption{Arquitecturas de redes neuronales convolucionales para la segmentación de objetos}
+    \small
+    \begin{tabularx}{\textwidth}{llp{2.5cm}X}
         \hline
-        \textbf{Nombre} & \textbf{Año} & \textbf{Creador}            & \textbf{Descripción Detallada}                                                                                                                                                                                                                                                                                                              \\
+        \textbf{Año} & \textbf{Nombre}       & \textbf{Creador}                 & \textbf{Descripción}                                                                                                                                                                                                                                                                                                                                                                                                                                                         \\
         \hline
-        U-Net           & 2015         & Olaf Ronneberger et al.     & Diseñada para la segmentación biomédica, U-Net destaca por su estructura de codificador-decodificador, que permite trabajar eficazmente con pocos datos de entrenamiento. Su capacidad para combinar contexto y localización precisa la hace ideal para tareas médicas de segmentación de imágenes.                                         \\
+        2015         & U-Net                 & \citeA{ronneberger2015u}         & Diseño codificador-decodificador enfocado en la segmentación semántica a nivel de píxel. Utiliza capas convolucionales y max-pooling para reducir la dimensionalidad espacial y profundizar en características. Su decodificador emplea up-sampling y convoluciones para reconstruir la resolución espacial, junto con conexiones de salto que concatenan características del codificador y decodificador, facilitando la precisión en la localización de bordes y detalles. \\
         \hline
-        SegNet          & 2015         & Vijay Badrinarayanan et al. & SegNet comparte similitudes con U-Net en términos de su estructura de codificador-decodificador, pero se diferencia por tener un decodificador más ligero y por su enfoque en la precisión de los bordes y contornos en la segmentación. Es notable por su uso de pooling índices para mejorar la eficiencia.                               \\
+        2017         & SegNet                & \citeA{badrinarayanan2017segnet} & Arquitectura codificador-decodificador optimizada para la eficiencia de memoria y cómputo. Combina capas convolucionales y max-pooling para la extracción de características, seguidas por up-sampling en el decodificador. Reutiliza índices de pooling para minimizar parámetros y uso de memoria, adecuada para aplicaciones en tiempo real y con recursos limitados.                                                                                                     \\
         \hline
-        DeepLab         & 2016         & Liang-Chieh Chen et al.     & DeepLab introduce las 'Atrous Convolutions' para captar información contextual en diferentes escalas, lo que mejora notablemente la segmentación. Incluye Atrous Spatial Pyramid Pooling, lo que le permite manejar objetos de distintos tamaños y mejorar la captura de detalles.                                                          \\
+        2017         & {Mask \newline R-CNN} & \citeA{he2017mask}               & Basada en Faster R-CNN, opera en dos fases: propone regiones de interés y luego, para cada región, clasifica el objeto, predice su cuadro delimitador y genera una máscara de segmentación a nivel de píxel.                                                                                                                                                                                                                                                                 \\
         \hline
-        Mask R-CNN      & 2017         & Kaiming He et al.           & Mask R-CNN extiende la arquitectura Faster R-CNN agregando una rama para la segmentación de instancias de objetos. Esta arquitectura es capaz de realizar detección de objetos y segmentación de instancias de manera simultánea y precisa, siendo muy influyente en aplicaciones de visión por computadora.                                \\
+        2018         & DeepLabv3+            & \citeA{chen2018encoder}          & DeepLabv3+ integra una red backbone (Xception o MobileNet) con un módulo ASPP para abordar escalas múltiples. Incluye un módulo decodificador que refina los detalles de segmentación, especialmente en bordes. Utiliza convoluciones atrous para capturar información contextual eficientemente.                                                                                                                                                                            \\
         \hline
-        PSPNet          & 2017         & Hengshuang Zhao et al.      & PSPNet utiliza un 'Pyramid Scene Parsing Network' para integrar características a distintas escalas. Destaca por su habilidad para manejar escenas complejas y su eficacia en la segmentación de detalles finos, gracias a su enfoque en la integración de contexto y detalle.                                                              \\
+        2019         & YOLACT                & \citeA{bolya2019yolact}          & YOLACT emplea una red backbone (como ResNet-50 o ResNet-101) para extracción de características. Cuenta con una cabeza de detección de instancias con cinco ramas: clasificación, caja delimitadora, coeficientes de máscara, prototipos de máscara, y selección de instancias. Realiza segmentación de instancias basada en coeficientes para desacoplar la máscara y detección de cajas.                                                                                   \\
         \hline
-        YOLACT          & 2019         & Daniel Bolya et al.         & YOLACT (You Only Look At Coefficients) es una arquitectura innovadora para la segmentación de instancias en tiempo real. Utiliza un enfoque de coeficientes prototípicos y máscaras de segmentación, permitiendo la segmentación de instancias con alta velocidad y eficacia, abriendo nuevas posibilidades en aplicaciones en tiempo real. \\
-        \hline
-    \end{tabular}
-    \caption{Cronología de las principales arquitecturas de CNN para la segmentación de imágenes.}
-    \label{tab:ArquitecturasCnn}
+    \end{tabularx}
+    \begin{minipage}{\textwidth}
+        \vspace{10pt}
+        \reference{Elaborado por el autor.}
+        \label{tab:ArquitecturasCnn}
+    \end{minipage}
 \end{table}
-
-
 
 \subsubsection{Redes generativas adversarias (GANs)}
 
@@ -468,10 +468,10 @@ Las redes neuronales de confrontación generativa (en inglés, Generative Advers
 
 \begin{figure}[H]
     \begin{center}
-        \includegraphics[width=0.7\textwidth]{Images/gan.pdf}
+        \includegraphics[width=1\textwidth]{Images/gans.png}
     \end{center}
     \caption{Arquitectura general de una red generativa adversaria.}
-    \reference{Elaborado por el autor.}
+    \reference{Datos tomados de \citeA{elgendy2020deep}.}
     \label{fig:GANs}
 \end{figure}
 
