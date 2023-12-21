@@ -1,17 +1,40 @@
 \subsection{Visión por computador}
 
-\subsubsection{Clasificación de objetos}
+La visión por computador es una disciplina de la inteligencia artificial que se dedica al desarrollo de algoritmos y sistemas capaces de interpretar y procesar visualmente la información contenida en imágenes digitales o secuencias de vídeo. Este campo multidisciplinario integra elementos de procesamiento de imágenes, aprendizaje automático, patrones de reconocimiento y percepción computacional, facilitando la extracción automática y el análisis detallado de datos visuales \cite{szeliski2022computer}.
 
+Es aplicada actualmente en campos como la robótica avanzada, interfaces de realidad aumentada y virtual, sistemas de navegación autónoma, aplicaciones de vigilancia de seguridad y en la interfaz humano-computadora \cite{geron2019hands}.
+
+Según expertos en el campo, como Patterson y Gibson \citeA{patterson2017deep}, esta área se divide esencialmente en dos subdominios: procesamiento de imágenes y reconocimiento de objetos. El primero se enfoca en la manipulación y mejora de datos visuales, mientras que el segundo se centra en la identificación e interpretación de entidades dentro de las imágenes.
+
+\subsubsection{Clasificación y localización de objetos}
+
+La clasificación de objetos implica la determinación del tipo de objeto presente en una imagen, una tarea que puede efectuarse sin necesidad de localizar su posición específica. Por ejemplo, la identificación de un perro en una imagen no requiere determinar su ubicación exacta \cite{szeliski2022computer}. En contraste, la localización de objetos se refiere a determinar la ubicación exacta de un objeto dentro de una imagen. Este proceso se asocia con técnicas de regresión, donde se predicen valores numéricos que representan la posición del objeto en el espacio visual \cite{geron2019hands}.
 
 \subsubsection{Detección de objetos}
 
+La detección de objetos combina las tareas de clasificación y localización, identificando y determinando la posición de múltiples objetos en una imagen. Este proceso se realiza mediante la generación de un cuadro delimitador (bounding box) que encierra cada objeto detectado, y la asignación de una etiqueta de clase a cada cuadro delimitador \cite{geron2019hands}, tal y como se muestra en la Figura~\ref{fig:object_detection}.
+
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=0.6\textwidth]{Images/object_detection.png}
+    \end{center}
+    \caption{Detección de objetos.}
+    \reference{Datos tomados de \citeA{geron2019hands}.}
+    \label{fig:object_detection}
+\end{figure}
+
 \subsubsection{Segmentación semántica}
 
-La segmentación semántica es un proceso de análisis de imágenes en el que se busca dividir una imagen en diferentes regiones o segmentos, cada uno de los cuales se asocia con un objeto o clase específica. Esta técnica se utiliza para identificar y clasificar objetos en una imagen, y se basa en el análisis de la estructura, el color y la textura de los objetos presentes en la imagen.
+La segmentación semántica implica asignar una etiqueta específica a cada píxel de una imagen (ver Figura~\ref{fig:semantic_segmentation}). Esencialmente la segmentación semántica es una tarea de clasificación de píxeles, donde cada píxel de la imagen es clasificado en una categoría correspondiente \cite{patterson2017deep}
 
-Según (Shelhamer, Long, \& Darrell, 2017), la segmentación semántica es una tarea crítica en el análisis de imágenes, ya que permite identificar y clasificar objetos en una imagen de manera automática. Esto es especialmente importante en aplicaciones como el seguimiento de objetos, la detección de anomalías y la generación de mapas temáticos.
-
-En (Chen, Papandreou, Kokkinos, Murphy, \& Yuille, 2014), se menciona que la segmentación semántica es una tarea desafiante debido a la complejidad de las imágenes y la variabilidad en la apariencia de los objetos. Sin embargo, el uso de técnicas de inteligencia artificial y aprendizaje automático, como el aprendizaje profundo, ha permitido mejorar significativamente la precisión y eficiencia en la segmentación semántica.
+\begin{figure}[H]
+    \begin{center}
+        \includegraphics[width=1\textwidth]{Images/semantic_segmentation.png}
+    \end{center}
+    \caption{Segmentación semántica.}
+    \reference{Datos tomados de \citeA{geron2019hands}.}
+    \label{fig:semantic_segmentation}
+\end{figure}
 
 \subsubsection{Visión por computador empleando aprendizaje profundo}
 
